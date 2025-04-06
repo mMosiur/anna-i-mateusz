@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +8,36 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="construction-container">
-        <div class="gear-box">
-            <div class="gear"></div>
-            <div class="gear"></div>
-        </div>
-        <h1>Strona w trakcie budowy</h1>
-        <p>Podobnie jak organizacja ślubu i wesela, tak i strona jeszcze nie jest skończona 😕</p>
+    <main class="wedding-container">
+        <header class="hero" id="welcome">
+            <h1>Cześć!</h1>
+        </header>
+
+        Witamy na stronie poświęconej naszemu ślubowi! <br>
+
+        <p id="ceremony-date-info" class="hide">...</p>
+
+        <p id="ceremony-location-info" class="hide">
+            Ślub odbędzie się w:<br>
+            <span id="ceremony-location-line-1">...</span>
+            <span id="ceremony-location-line-2">...</span>
+        </p>
+        <p id="reception-location-info" class="hide">
+            Przyjęcie weselne odbędzie się w:
+            <span id="reception-location-line-1">...</span>
+            <span id="reception-location-line-2">...</span>
+        </p>
+
+        <p id="phone-numbers-section" class="hide">
+            Numery telefonów:<br>
+            Pan młody: <a id="groom-phone-number">...</a><br>
+            Pani młoda: <a id="bride-phone-number">...</a><br>
+        </p>
 
         <div class="countdown">
             <div id="days" class="countdown-item">
-                <span class="number">000</span>
+                <span class="number">00</span>
                 <span class="label">Dni</span>
             </div>
             <div class="time-row">
@@ -39,8 +55,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     <script src="script.js"></script>
 </body>
-
 </html>
