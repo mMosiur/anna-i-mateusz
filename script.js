@@ -1,5 +1,5 @@
 const apiBaseUrl = window.location.hostname === 'annaimateusz.pl'
-    ? 'https://your-production-api.com'
+    ? 'https://anna-i-mateusz.azurewebsites.net'
     : 'http://localhost:5058';
 
 document.addEventListener('DOMContentLoaded', () => {
