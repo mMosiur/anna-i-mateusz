@@ -11,7 +11,7 @@
 <body>
     <main class="wedding-container">
         <header class="hero" id="welcome">
-            <h1>Cześć!</h1>
+            <h1>Witamy!</h1>
         </header>
 
         Witamy na stronie poświęconej naszemu ślubowi! <br>
@@ -29,10 +29,17 @@
             <span id="reception-location-line-2">...</span>
         </p>
 
-        <p id="phone-numbers-section" class="hide">
-            Numery telefonów:<br>
-            Pan młody: <a id="groom-phone-number">...</a><br>
-            Pani młoda: <a id="bride-phone-number">...</a><br>
+        <p id="phone-numbers-section" >
+            <div class="phone-links">
+                <a class="phone-link" id="bride-phone-number">
+                    <span class="phone-label">Anna</span>
+                    <span class="phone-number">...</span>
+                </a>
+                <a class="phone-link" id="groom-phone-number">
+                    <span class="phone-label">Mateusz</span>
+                    <span class="phone-number">...</span>
+                </a>
+            </div>
         </p>
 
         <div class="countdown">
@@ -53,6 +60,36 @@
                     <span class="number">00</span>
                     <span class="label">Sekund</span>
                 </div>
+            </div>
+        </div>
+        <div class="map-section hide" id="reception-map-section">
+            <button class="map-toggle" data-map="reception">
+                Pokaż mapę dojazdu na wesele
+                <span class="toggle-icon">▼</span>
+            </button>
+            <div class="map-container collapsed">
+                <iframe
+                    id="reception-map"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+        <div class="map-section hide" id="church-map-section">
+            <button class="map-toggle" data-map="church">
+                Pokaż mapę dojazdu do kościoła
+                <span class="toggle-icon">▼</span>
+            </button>
+            <div class="map-container collapsed">
+                <iframe
+                    id="church-map"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </main>

@@ -1,16 +1,25 @@
-const apiBaseUrl = 'https://anna-i-mateusz.azurewebsites.net';
+const apiBaseUrl = window.location.hostname === 'annaimateusz.pl'
+    ? 'https://your-production-api.com'
+    : 'http://localhost:5058';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const gears = document.querySelectorAll('.gear');
+    // Initialize maps
+    const mapToggles = document.querySelectorAll('.map-toggle');
 
-    // Add hover effect to gears
-    gears.forEach(gear => {
-        gear.addEventListener('mouseover', () => {
-            gear.style.animation = 'spin 1s linear infinite';
-        });
+    mapToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const mapContainer = toggle.nextElementSibling;
+            const mapType = toggle.dataset.map;
 
-        gear.addEventListener('mouseout', () => {
-            gear.style.animation = 'spin 4s linear infinite';
+            mapContainer.classList.toggle('collapsed');
+            toggle.classList.toggle('active');
+
+            // Update button text
+            if (!mapContainer.classList.contains('collapsed')) {
+                toggle.innerHTML = `Ukryj mapę <span class="toggle-icon">▼</span>`;
+            } else {
+                toggle.innerHTML = `Pokaż mapę dojazdu ${mapType === 'church' ? 'do kościoła' : 'na wesele'} <span class="toggle-icon">▼</span>`;
+            }
         });
     });
 
@@ -23,22 +32,35 @@ async function fetchWeddingInfo() {
         const apiKey = urlParams.get('key');
 
         let data = null;
-        if (!!apiKey) {
+
+        if (apiKey) {
+            // Check if cached data exists
+            const cacheKey = `weddingInfo_${apiKey}`;
+            const cachedData = localStorage.getItem(cacheKey);
+            if (cachedData) {
+                data = JSON.parse(cachedData);
+                console.log('Using cached data');
+                updateWeddingInfo(data); // Update UI with cached data
+            }
+
             // Fetch wedding info from the server
             const response = await fetch(`${apiBaseUrl}/info`, {
                 headers: {
                     'X-Api-Key': apiKey
                 }
             });
-            if (!!response.ok) {
+            if (response.ok) {
                 data = await response.json();
+                console.log('Fetched data from server');
+                // Cache the fetched data
+                localStorage.setItem(cacheKey, JSON.stringify(data));
             } else {
                 console.error('Network response was not ok:', response.statusText);
             }
         } else {
             console.warn('No API key provided in URL');
         }
-        updateWeddingInfo(data);
+        updateWeddingInfo(data); // Update UI with data
     } catch (error) {
         console.error('Error fetching wedding info:', error);
     }
@@ -60,22 +82,27 @@ function setWeddingInfo(data) {
     document.querySelector('#reception-location-info').classList.remove('hide');
     document.querySelector('#phone-numbers-section').classList.remove('hide');
 
-    document.querySelector('#welcome h1').textContent = `Cześć ${data.guestsName}!`;
-    var date = new Date(data.ceremonyDateAndTime);
+    document.querySelector('#welcome h1').textContent = `Witamy ${data.guests.name}!`;
+    var date = new Date(data.ceremony.dateAndTime);
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     var formattedDate = date.toLocaleDateString('pl-PL', options);
     var formattedTime = date.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
     document.querySelector('#ceremony-date-info').textContent = `${formattedDate} o ${formattedTime}`;
-    document.querySelector('#ceremony-location-line-1').textContent = data.ceremonyLocationLine1;
-    document.querySelector('#ceremony-location-line-2').textContent = data.ceremonyLocationLine2;
-    document.querySelector('#reception-location-line-1').textContent = data.receptionLocationLine1;
-    document.querySelector('#reception-location-line-2').textContent = data.receptionLocationLine2;
+    document.querySelector('#ceremony-location-line-1').textContent = data.ceremony.locationLine1;
+    document.querySelector('#ceremony-location-line-2').textContent = data.ceremony.locationLine2;
+    document.querySelector('#reception-location-line-1').textContent = data.reception.locationLine1;
+    document.querySelector('#reception-location-line-2').textContent = data.reception.locationLine2;
 
     // phone number with link to call
-    document.querySelector('#groom-phone-number').textContent = data.groomPhoneNumber;
+    document.querySelector('#groom-phone-number .phone-number').textContent = data.groomPhoneNumber;
     document.querySelector('#groom-phone-number').href = `tel:${data.groomPhoneNumber}`;
-    document.querySelector('#bride-phone-number').textContent = data.bridePhoneNumber;
+    document.querySelector('#bride-phone-number .phone-number').textContent = data.bridePhoneNumber;
     document.querySelector('#bride-phone-number').href = `tel:${data.bridePhoneNumber}`;
+
+    document.querySelector('#reception-map-section').classList.remove('hide');
+    document.querySelector('#reception-map').src = data.reception.locationMapsLink;
+    document.querySelector('#church-map-section').classList.remove('hide');
+    document.querySelector('#church-map').src = data.ceremony.locationMapsLink;
 }
 
 function clearWeddingInfo() {
@@ -84,6 +111,8 @@ function clearWeddingInfo() {
     document.querySelector('#ceremony-location-info').classList.add('hide');
     document.querySelector('#reception-location-info').classList.add('hide');
     document.querySelector('#phone-numbers-section').classList.add('hide');
+    document.querySelector('#reception-map-section').classList.add('hide');
+    document.querySelector('#church-map-section').classList.add('hide');
 }
 
 function updateCountdown() {
