@@ -83,7 +83,7 @@ function setWeddingInfo(data) {
     document.querySelector('#reception-location-info').classList.remove('hide');
     document.querySelector('#phone-numbers-section').classList.remove('hide');
 
-    document.querySelector('#welcome h1').textContent = data.guestInfo.greeting;
+    document.querySelector('#welcome h1').textContent = data.guests.greeting;
     document.querySelector('#ceremony-location-line-1').textContent = data.ceremony.locationLine1;
     document.querySelector('#ceremony-location-line-2').textContent = data.ceremony.locationLine2;
     document.querySelector('#reception-location-line-1').textContent = data.reception.locationLine1;
