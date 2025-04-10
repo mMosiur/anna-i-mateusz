@@ -5,6 +5,7 @@ export function updateWeddingInfo(data) {
         return;
     }
 
+    hideNoAccessMessage();
     showAllContent();
     setWeddingInfo(data);
 }
@@ -32,7 +33,8 @@ function setWeddingInfo(data) {
 
 function hideAllContent() {
     const elementsToHide = [
-        '.hero',
+        '#greeting-text',
+        '.welcome-text',
         '.locations-container',
         '.calendar-section',
         '.confirmation-section',
@@ -50,7 +52,8 @@ function hideAllContent() {
 
 function showAllContent() {
     const elementsToShow = [
-        '.hero',
+        '#greeting-text',
+        '.welcome-text',
         '.locations-container',
         '.calendar-section',
         '.confirmation-section',
@@ -67,9 +70,17 @@ function showAllContent() {
 }
 
 function showNoAccessMessage() {
-    const welcomeText = document.querySelector('.welcome-text');
-    if (welcomeText) {
-        welcomeText.textContent = 'Aby zobaczyć szczegóły wydarzenia, proszę użyć kodu QR z zaproszenia.';
-        welcomeText.style.color = '#95a5a6';
+    const noKeyText = document.querySelector('#no-key-text');
+    if (noKeyText) {
+        noKeyText.textContent = 'Aby zobaczyć szczegóły wydarzenia, proszę użyć kodu QR z zaproszenia.';
+        noKeyText.classList.remove('hide');
+    }
+}
+
+function hideNoAccessMessage() {
+    const noKeyText = document.querySelector('#no-key-text');
+    if (noKeyText) {
+        noKeyText.textContent = '';
+        noKeyText.classList.add('hide');
     }
 }

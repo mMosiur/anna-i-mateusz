@@ -24,6 +24,7 @@ export async function fetchWeddingInfo() {
 
         if (!response.ok) {
             console.error('Network response was not ok:', response.statusText);
+            localStorage.removeItem(cacheKey);
             updateWeddingInfo(null);
             return;
         }
@@ -33,6 +34,7 @@ export async function fetchWeddingInfo() {
         updateWeddingInfo(data);
     } catch (error) {
         console.error('Error fetching wedding info:', error);
+        localStorage.removeItem(cacheKey);
         updateWeddingInfo(null);
     }
 }
