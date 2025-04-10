@@ -1,35 +1,127 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anna i Mateusz 2025</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <main class="wedding-container">
-        <header class="hero" id="welcome">
-            <h1>Witamy!</h1>
+        <header class="hero">
+            <h1 id="greeting-text">...</h1>
         </header>
 
-        Witamy na stronie poświęconej naszemu ślubowi! <br>
-
-        <p id="ceremony-date-info" class="hide">...</p>
-
-        <p id="ceremony-location-info" class="hide">
-            Ślub odbędzie się w:<br>
-            <span id="ceremony-location-line-1">...</span>
-            <span id="ceremony-location-line-2">...</span>
-        </p>
-        <p id="reception-location-info" class="hide">
-            Przyjęcie weselne odbędzie się w:
-            <span id="reception-location-line-1">...</span>
-            <span id="reception-location-line-2">...</span>
+        <p class="welcome-text">
+            Jeśli Twoje imię pojawia się na tej stronie, to dlatego,
+            że chcemy dzielić z Tobą jeden z najważniejszych dni naszego
+            życia – nasz ślub i&nbsp;następujące po nin przyjęcie weselne.
         </p>
 
-        <p id="phone-numbers-section" >
+        <div class="welcome-image">
+            <img src="images/flowers.png" alt="Kwiecisty łuk" class="floral-arch" />
+        </div>
+
+        <div class="date-section">
+            <p class="pre-date-text">Termin:</p>
+            <div class="date-time">
+                <span class="weekday">Sobota</span>
+                <span class="date">12 | 07 | 2025</span>
+                <span class="time">14:00</span>
+            </div>
+        </div>
+
+        <div class="countdown-wrapper">
+            <p class="countdown-header">Do wydarzenia pozostało:</p>
+            <div class="countdown-box">
+                <div class="countdown-unit">
+                    <span class="countdown-value" id="countdown-days">00</span>
+                    <span class="countdown-label">Dni</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-unit">
+                    <span class="countdown-value" id="countdown-hours">00</span>
+                    <span class="countdown-label">Godzin</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-unit">
+                    <span class="countdown-value" id="countdown-minutes">00</span>
+                    <span class="countdown-label">Minut</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-unit">
+                    <span class="countdown-value" id="countdown-seconds">00</span>
+                    <span class="countdown-label">Sekund</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-section">
+            <button id="download-calendar"
+                title="Pobierz plik .ics który pozwoli dodać wydarzenie do Twojego kalendarza (Google Calendar, Apple Calendar, Outlook)">
+                Zapisz datę w kalendarzu
+            </button>
+            <p class="calendar-help">Przycisk rozpocznie pobieranie pliku wydarzenia, którego otwarcie pozwoli dodać je
+                do kalendarza</p>
+        </div>
+
+        <img src="images/blue_flower.png" alt="Niebieska róża" class="flower-divider" />
+
+        <div class="locations-container">
+            <div class="location-block">
+                <div class="location-header">
+                    <img src="images/church-icon.svg" alt="Kościół" class="location-icon" />
+                    <div class="location-section ceremony">
+                        <h2>Ślub odbędzie się w</h2>
+                        <p class="location-name" id="ceremony-location-line">...</p>
+                        <button class="map-toggle" data-map="church">
+                            Pokaż kościół na mapie
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="map-container collapsed" id="church-map-section">
+                    <iframe id="church-map" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+            <div class="location-block">
+                <div class="location-header">
+                    <img src="images/reception-icon.svg" alt="Sala weselna" class="location-icon" />
+                    <div class="location-section reception">
+                        <h2>Wesele będzie miało miejsce na</h2>
+                        <p class="location-name" id="reception-location-line">...</p>
+                        <button class="map-toggle" data-map="reception">
+                            Pokaż salę na mapie
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="map-container collapsed" id="reception-map-section">
+                    <iframe id="reception-map" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <img src="images/purple_flower.png" alt="Fioletowa róża" class="flower-divider" />
+
+        <div class="confirmation-section">
+            <p class="confirmation-text">
+                Bardzo prosimy o potwierdzenie obecności do <span class="highlight-date">01 | 06 | 2025</span>.<br>
+                Jeśli są jakieś szczególne wymagania dietetyczne, prosimy o ich wskazanie.
+            </p>
             <div class="phone-links">
                 <a class="phone-link" id="bride-phone-number">
                     <span class="phone-label">Anna</span>
@@ -40,59 +132,16 @@
                     <span class="phone-number">...</span>
                 </a>
             </div>
-        </p>
+        </div>
 
-        <div class="countdown">
-            <div id="days" class="countdown-item">
-                <span class="number">00</span>
-                <span class="label">Dni</span>
-            </div>
-            <div class="time-row">
-                <div id="hours" class="countdown-item">
-                    <span class="number">00</span>
-                    <span class="label">Godzin</span>
-                </div>
-                <div id="minutes" class="countdown-item">
-                    <span class="number">00</span>
-                    <span class="label">Minut</span>
-                </div>
-                <div id="seconds" class="countdown-item">
-                    <span class="number">00</span>
-                    <span class="label">Sekund</span>
-                </div>
-            </div>
-        </div>
-        <div class="map-section hide" id="reception-map-section">
-            <button class="map-toggle" data-map="reception">
-                Pokaż mapę dojazdu na wesele
-                <span class="toggle-icon">▼</span>
-            </button>
-            <div class="map-container collapsed">
-                <iframe
-                    id="reception-map"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
-        <div class="map-section hide" id="church-map-section">
-            <button class="map-toggle" data-map="church">
-                Pokaż mapę dojazdu do kościoła
-                <span class="toggle-icon">▼</span>
-            </button>
-            <div class="map-container collapsed">
-                <iframe
-                    id="church-map"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
+        <footer class="disclaimer">
+            <p>
+                Kody QR na zaproszeniach oraz linki do tej strony są personalizowane unikalnym kluczem,
+                prosimy ich nie udostępniać.
+            </p>
+        </footer>
     </main>
-    <script src="script.js"></script>
+    <script src="scripts/main.js" type="module"></script>
 </body>
+
 </html>
