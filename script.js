@@ -45,6 +45,8 @@ async function fetchWeddingInfo() {
 
             // Fetch wedding info from the server
             const response = await fetch(`${apiBaseUrl}/info`, {
+                method: 'GET',
+                mode: 'cors',
                 headers: {
                     'X-Api-Key': apiKey
                 }
@@ -77,17 +79,11 @@ function updateWeddingInfo(data) {
 function setWeddingInfo(data) {
     // Update DOM with received data
     // Remove class hide
-    document.querySelector('#ceremony-date-info').classList.remove('hide');
     document.querySelector('#ceremony-location-info').classList.remove('hide');
     document.querySelector('#reception-location-info').classList.remove('hide');
     document.querySelector('#phone-numbers-section').classList.remove('hide');
 
-    document.querySelector('#welcome h1').textContent = `Witamy ${data.guests.name}!`;
-    var date = new Date(data.ceremony.dateAndTime);
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    var formattedDate = date.toLocaleDateString('pl-PL', options);
-    var formattedTime = date.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
-    document.querySelector('#ceremony-date-info').textContent = `${formattedDate} o ${formattedTime}`;
+    document.querySelector('#welcome h1').textContent = data.guestInfo.greeting;
     document.querySelector('#ceremony-location-line-1').textContent = data.ceremony.locationLine1;
     document.querySelector('#ceremony-location-line-2').textContent = data.ceremony.locationLine2;
     document.querySelector('#reception-location-line-1').textContent = data.reception.locationLine1;
