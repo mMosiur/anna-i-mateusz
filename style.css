@@ -469,7 +469,7 @@ body {
 .flower-divider {
     display: block;
     width: 100%;
-    max-width: 180px;
+    max-width: 120px;
     height: auto;
     margin: 3.5rem auto;
     opacity: 0.8;
@@ -488,14 +488,14 @@ img[src*="purple_flower"] {
 
 @media (max-width: 768px) {
     .blue-flower-divider {
-        max-width: 150px;
+        max-width: 100px;
         margin: 3rem auto;
     }
 }
 
 @media (max-width: 480px) {
     .blue-flower-divider {
-        max-width: 120px;
+        max-width: 80px;
         margin: 2.5rem auto;
     }
 }
