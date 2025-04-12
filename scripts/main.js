@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function initializeApp() {
     setupCalendarButton();
     initializeMaps();
+    setupAboutUsButton();
     await fetchWeddingInfo();
 }
 
@@ -26,5 +27,14 @@ function setupCalendarButton() {
             calendarButton.classList.remove('loading');
             calendarButton.disabled = false;
         }
+    });
+}
+
+function setupAboutUsButton() {
+    document.querySelector('.about-us-toggle').addEventListener('click', function() {
+        const content = document.querySelector('.about-us-content');
+        const icon = this.querySelector('.toggle-icon');
+        content.classList.toggle('collapsed');
+        icon.textContent = content.classList.contains('collapsed') ? '▼' : '▲';
     });
 }

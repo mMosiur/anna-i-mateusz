@@ -14,6 +14,9 @@ function setWeddingInfo(data) {
     // Update greeting
     document.querySelector('#greeting-text').textContent = data.guests.greeting;
 
+    // Update about-us section
+    document.querySelector('#about-us-content-wrapper').innerHTML = data.aboutUsSection;
+
     // Update locations
     document.querySelector('#ceremony-location-line').textContent = data.ceremony.locationLine;
     document.querySelector('#reception-location-line').textContent = data.reception.locationLine;
@@ -39,6 +42,7 @@ function hideAllContent() {
         '.calendar-section',
         '.confirmation-section',
         '.flower-divider',
+        '.about-us-section',
         '.disclaimer'
     ];
 
@@ -58,6 +62,7 @@ function showAllContent() {
         '.calendar-section',
         '.confirmation-section',
         '.flower-divider',
+        '.about-us-section',
         '.disclaimer'
     ];
 
