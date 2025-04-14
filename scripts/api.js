@@ -12,8 +12,8 @@ export async function fetchWeddingInfo() {
         if (cachedData) {
             console.log('Using cached data');
             var parsedData = JSON.parse(cachedData);
-            updateWeddingInfo(parsedData);
-            // Don't return and fetch new data if we have cached data
+            updateWeddingInfo(parsedData); // Show cached data immediately
+            // Fetch fresh data in the background to update if changed
         }
 
         const response = await fetch(`${apiBaseUrl}/info`, {

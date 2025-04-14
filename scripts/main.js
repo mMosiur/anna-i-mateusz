@@ -31,10 +31,48 @@ function setupCalendarButton() {
 }
 
 function setupAboutUsButton() {
-    document.querySelector('.about-us-toggle').addEventListener('click', function() {
-        const content = document.querySelector('.about-us-content');
-        const icon = this.querySelector('.toggle-icon');
-        content.classList.toggle('collapsed');
-        icon.textContent = content.classList.contains('collapsed') ? '▼' : '▲';
-    });
+    const aboutUsToggle = document.querySelector('.about-us-toggle');
+    const aboutUsContent = document.querySelector('.about-us-content');
+
+    if (aboutUsToggle && aboutUsContent) {
+        aboutUsToggle.addEventListener('click', () => {
+            const isCollapsed = aboutUsContent.classList.contains('collapsed');
+            const contentWrapper = aboutUsContent.querySelector('.content-wrapper');
+
+            if (isCollapsed) {
+                // Temporarily remove transition to get the final height correctly
+                aboutUsContent.style.transition = 'none';
+                aboutUsContent.classList.remove('collapsed'); // Make content visible to measure
+                const scrollHeight = contentWrapper.scrollHeight;
+                aboutUsContent.classList.add('collapsed'); // Add back immediately before animation
+                aboutUsContent.offsetHeight; // Force reflow
+
+                // Re-enable transition and start animation
+                aboutUsContent.style.transition = ''; // Use CSS defined transition
+                aboutUsContent.classList.remove('collapsed');
+                aboutUsContent.style.height = scrollHeight + 'px';
+                aboutUsToggle.innerHTML = 'Zwiń <span class="toggle-icon">▲</span>';
+
+                // Remove height after transition to allow content changes
+                aboutUsContent.addEventListener('transitionend', () => {
+                    if (!aboutUsContent.classList.contains('collapsed')) {
+                         aboutUsContent.style.height = '';
+                    }
+                }, { once: true });
+
+            } else {
+                // Set height explicitly to its current scrollHeight so the transition starts correctly
+                aboutUsContent.style.height = contentWrapper.scrollHeight + 'px';
+
+                // Force browser repaint/reflow to register the starting height
+                aboutUsContent.offsetHeight;
+
+                // Add the class and set height to 0px to trigger the CSS transition
+                aboutUsContent.classList.add('collapsed');
+                aboutUsContent.style.height = '0px'; // Animate height to 0
+                aboutUsToggle.innerHTML = 'Rozwiń <span class="toggle-icon">▼</span>';
+                // --- End Collapse Logic ---
+            }
+        });
+    }
 }
