@@ -42,6 +42,7 @@ function hideAllContent() {
         '.calendar-section',
         '.confirmation-section',
         '.flower-divider',
+        '.gift-suggestions-section',
         '.about-us-section',
         '.disclaimer'
     ];
@@ -62,6 +63,7 @@ function showAllContent() {
         '.calendar-section',
         '.confirmation-section',
         '.flower-divider',
+        '.gift-suggestions-section',
         '.about-us-section',
         '.disclaimer'
     ];
