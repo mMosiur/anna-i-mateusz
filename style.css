@@ -770,6 +770,100 @@ body {
     }
 }
 
+/* Seating section */
+
+.seating-section {
+    text-align: center;
+    margin: 1rem auto 2rem;
+    max-width: 800px;
+    padding: 0 1rem;
+}
+
+.seating-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.seating-title {
+    font-size: 1.3rem;
+    color: #4f6d68;
+    margin: 0 0 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.seating-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #ffffff, #f0f8ff);
+    border: 2px solid #e8f4f8;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.seating-display:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.seating-display:active {
+    transform: scale(0.98);
+}
+
+.seating-number {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    font-family: 'Crimson Pro', serif;
+    letter-spacing: 1px;
+}
+
+.seating-description {
+    font-size: 1rem;
+    color: #4f6d68;
+    margin: 0.8rem 0 0;
+    font-style: italic;
+    letter-spacing: 0.3px;
+}
+
+@media (max-width: 480px) {
+    .seating-info {
+        padding: 1.5rem;
+        max-width: 250px;
+    }
+
+    .seating-title {
+        font-size: 1.1rem;
+    }
+
+    .seating-display {
+        width: 100px;
+        height: 100px;
+    }
+
+    .seating-number {
+        font-size: 1.5rem;
+    }
+
+    .seating-description {
+        font-size: 0.9rem;
+    }
+}
+
 /* Gift suggestion */
 
 .gift-suggestions-section {

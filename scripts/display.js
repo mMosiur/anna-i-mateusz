@@ -32,6 +32,9 @@ function setWeddingInfo(data) {
     const bridePhone = document.querySelector('#bride-phone-number');
     bridePhone.querySelector('.phone-number').textContent = data.bridePhoneNumber;
     bridePhone.href = `tel:${data.bridePhoneNumber}`;
+
+    // Update seating information
+    updateSeatingInfo(data.guests.table);
 }
 
 function hideAllContent() {
@@ -41,6 +44,7 @@ function hideAllContent() {
         '.locations-container',
         '.calendar-section',
         '.confirmation-section',
+        '.seating-section',
         '.flower-divider',
         '.gift-suggestions-section',
         '.about-us-section',
@@ -90,4 +94,29 @@ function hideNoAccessMessage() {
         noKeyText.textContent = '';
         noKeyText.classList.add('hide');
     }
+}
+
+function updateSeatingInfo(seating) {
+    const seatingSection = document.querySelector('.seating-section');
+    const seatingNumber = document.querySelector('#seating-number');
+    const seatingDisplay = document.querySelector('#seating-display');
+
+    if (!seating || seating === null) {
+        // Hide the seating section if no seating info is provided
+        seatingSection.classList.add('hide');
+    } else {
+        // Show the seating section and update the number
+        seatingSection.classList.remove('hide');
+        seatingNumber.textContent = seating;
+
+        // Add easter egg - show message on every click
+        seatingDisplay.removeEventListener('click', showEasterEggAlert);
+        seatingDisplay.addEventListener('click', showEasterEggAlert);
+    }
+}
+
+function showEasterEggAlert() {
+    const emojis = [ "🎉", "💕", "🌸", "🥂", "💐" ];
+    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+    alert(`${randomEmoji} Też nie możemy się już doczekać ${randomEmoji}`);
 }
