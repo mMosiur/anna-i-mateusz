@@ -653,6 +653,33 @@ body {
     }
 }
 
+/* Countdown message styles for party and thank you states */
+.countdown-wrapper.elapsed-time .countdown-box {
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    border: 2px solid #dee2e6;
+}
+
+.countdown-wrapper.elapsed-time .countdown-value {
+    color: #495057;
+}
+
+.countdown-wrapper.elapsed-time .countdown-unit:first-child .countdown-value {
+    color: #495057;
+}
+
+@media (max-width: 768px) {
+    .countdown-header {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-header {
+        font-size: 1.2rem !important;
+        padding: 0 1rem;
+    }
+}
+
 
 /* Confirmation section */
 
