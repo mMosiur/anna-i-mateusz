@@ -40,6 +40,7 @@ function setWeddingInfo(data) {
 function hideAllContent() {
     const elementsToHide = [
         '#greeting-text',
+        '.page-navigation',
         '.welcome-text',
         '.locations-container',
         '.calendar-section',
@@ -62,6 +63,7 @@ function hideAllContent() {
 function showAllContent() {
     const elementsToShow = [
         '#greeting-text',
+        '.page-navigation',
         '.welcome-text',
         '.locations-container',
         '.calendar-section',
@@ -116,7 +118,7 @@ function updateSeatingInfo(seating) {
 }
 
 function showEasterEggAlert() {
-    const emojis = [ "🎉", "💕", "🌸", "🥂", "💐" ];
+    const emojis = ["🎉", "💕", "🌸", "🥂", "💐"];
     const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
     alert(`${randomEmoji} Też nie możemy się już doczekać ${randomEmoji}`);
 }

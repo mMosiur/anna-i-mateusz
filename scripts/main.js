@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function initializeApp() {
     setupCalendarButton();
+    setupGalleryLink();
     initializeMaps();
     setupAboutUsButton();
     await fetchWeddingInfo();
@@ -28,6 +29,20 @@ function setupCalendarButton() {
             calendarButton.disabled = false;
         }
     });
+}
+
+function setupGalleryLink() {
+    const galleryLink = document.getElementById('gallery-link');
+    if (galleryLink) {
+        galleryLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const urlParams = new URLSearchParams(window.location.search);
+            const apiKey = urlParams.get('key');
+            if (apiKey) {
+                window.location.href = `gallery.html?key=${apiKey}`;
+            }
+        });
+    }
 }
 
 function setupAboutUsButton() {
@@ -56,7 +71,7 @@ function setupAboutUsButton() {
                 // Remove height after transition to allow content changes
                 aboutUsContent.addEventListener('transitionend', () => {
                     if (!aboutUsContent.classList.contains('collapsed')) {
-                         aboutUsContent.style.height = '';
+                        aboutUsContent.style.height = '';
                     }
                 }, { once: true });
 
