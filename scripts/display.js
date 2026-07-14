@@ -33,6 +33,15 @@ function setWeddingInfo(data) {
     bridePhone.querySelector('.phone-number').textContent = data.bridePhoneNumber;
     bridePhone.href = `tel:${data.bridePhoneNumber}`;
 
+    // Update photo album link
+    const photoAlbumLink = document.querySelector('#photo-album-link');
+    if (data.photoDriveLink) {
+        photoAlbumLink.href = data.photoDriveLink;
+        photoAlbumLink.classList.remove('hide');
+    } else {
+        photoAlbumLink.classList.add('hide');
+    }
+
     // Update seating information
     updateSeatingInfo(data.guests.table);
 }
@@ -103,7 +112,7 @@ function updateSeatingInfo(seating) {
     const seatingNumber = document.querySelector('#seating-number');
     const seatingDisplay = document.querySelector('#seating-display');
 
-    if (!seating || seating === null) {
+    if (!seating) {
         // Hide the seating section if no seating info is provided
         seatingSection.classList.add('hide');
     } else {
@@ -120,5 +129,5 @@ function updateSeatingInfo(seating) {
 function showEasterEggAlert() {
     const emojis = ["🎉", "💕", "🌸", "🥂", "💐"];
     const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-    alert(`${randomEmoji} Też nie możemy się już doczekać ${randomEmoji}`);
+    alert(`${randomEmoji} Bardzo nam miło, że byliście z nami ${randomEmoji}`);
 }
