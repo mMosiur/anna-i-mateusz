@@ -6,7 +6,8 @@ let currentPhotoIndex = 0;
 let apiKey = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    initializeGallery();
+    initializeGallery()
+        .then(_ => {});
 });
 
 async function initializeGallery() {
@@ -27,7 +28,6 @@ function hideAllContent() {
     const elementsToHide = [
         '#greeting-text',
         '.page-navigation',
-        '.upload-section',
         '.gallery-section'
     ];
 
@@ -41,7 +41,6 @@ function showAllContent() {
     const elementsToShow = [
         '#greeting-text',
         '.page-navigation',
-        '.upload-section',
         '.gallery-section'
     ];
 
@@ -58,16 +57,6 @@ function showAllContent() {
 }
 
 function setupEventListeners() {
-    // File input change
-    const photoInput = document.getElementById('photo-input');
-    photoInput.addEventListener('change', handleFileSelect);
-
-    // Gallery filters
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => handleFilterChange(btn));
-    });
-
     // Modal controls
     const modal = document.getElementById('photo-modal');
     const modalClose = document.querySelector('.modal-close');
@@ -84,74 +73,22 @@ function setupEventListeners() {
     document.addEventListener('keydown', handleKeyboardNavigation);
 }
 
-async function handleFileSelect(event) {
-    const files = Array.from(event.target.files);
-    if (files.length === 0) return;
-
-    const validFiles = files.filter(file => {
-        const validTypes = [
-            'image/jpeg',
-            'image/png',
-            'image/webp',
-            'image/heic',
-            'image/heif'
-        ];
-        return validTypes.includes(file.type) && file.size <= 10 * 1024 * 1024; // 10MB limit
-    });
-
-    if (validFiles.length === 0) {
-        alert('Proszę wybrać prawidłowe pliki zdjęć (JPG, PNG, WEBP, HEIC/HEIF, maksymalnie 10MB każdy).');
-        return;
-    }
-
-    await uploadPhotos(validFiles);
-    event.target.value = ''; // Reset input
+function showPrevPhoto() {
+    if (currentPhotoIndex <= 0) return;
+    currentPhotoIndex--;
+    updateModalContent();
 }
 
-async function uploadPhotos(files) {
-    const progressContainer = document.querySelector('.upload-progress');
-    const progressFill = document.querySelector('.progress-fill');
-    const progressText = document.querySelector('.progress-text');
+function showNextPhoto() {
+    if (currentPhotoIndex >= currentPhotos.length - 1) return;
+    currentPhotoIndex++;
+    updateModalContent();
+}
 
-    progressContainer.classList.remove('hide');
-
-    try {
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const progress = ((i + 1) / files.length) * 100;
-
-            progressFill.style.width = `${progress}%`;
-            progressText.textContent = `Przesyłanie ${i + 1} z ${files.length}...`;
-
-            const formData = new FormData();
-            formData.append('photo', file);
-
-            const response = await fetch(`${apiBaseUrl}/gallery/upload`, {
-                method: 'POST',
-                headers: {
-                    'X-Api-Key': apiKey
-                },
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to upload ${file.name}`);
-            }
-        }
-
-        progressText.textContent = 'Przesyłanie zakończone!';
-        setTimeout(() => {
-            progressContainer.classList.add('hide');
-            loadPhotos(); // Refresh gallery
-        }, 1500);
-
-    } catch (error) {
-        console.error('Upload error:', error);
-        progressText.textContent = 'Błąd podczas przesyłania. Spróbuj ponownie.';
-        setTimeout(() => {
-            progressContainer.classList.add('hide');
-        }, 3000);
-    }
+function updateModalContent() {
+    const photo = currentPhotos[currentPhotoIndex];
+    document.getElementById('modal-image').src = photo.fullUrl;
+    document.getElementById('modal-date').textContent = formatDate(photo.uploadDate);
 }
 
 async function loadPhotos() {
@@ -200,28 +137,6 @@ function displayPhotos(photos) {
     `).join('');
 
     galleryGrid.innerHTML = photosHTML;
-}
-
-function handleFilterChange(clickedBtn) {
-    // Remove active class from all buttons
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-
-    // Add active class to clicked button
-    clickedBtn.classList.add('active');
-
-    const filter = clickedBtn.dataset.filter;
-    let filteredPhotos = currentPhotos;
-
-    if (filter === 'recent') {
-        const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
-        filteredPhotos = currentPhotos.filter(photo =>
-            new Date(photo.uploadDate) > thirtyMinutesAgo
-        );
-    }
-
-    displayPhotos(filteredPhotos);
 }
 
 function openModal(index) {

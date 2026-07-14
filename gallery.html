@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria zdjęć - Anna i Mateusz 2025</title>
+    <title>Galeria gości - Anna i Mateusz 2025</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
 <body>
     <main class="wedding-container">
         <header class="hero">
-            <h1 id="greeting-text" class="hide">Galeria zdjęć</h1>
+            <h1 id="greeting-text" class="hide">Galeria gości</h1>
             <span id="no-key-text">Aby zobaczyć galerię, proszę użyć kodu QR z zaproszenia.</span>
         </header>
 
@@ -27,32 +27,8 @@
             <a href="index.html" class="nav-link">← Powrót do strony głównej</a>
         </nav>
 
-        <section class="upload-section hide">
-            <h2>Dodaj swoje zdjęcia</h2>
-            <div class="upload-container">
-                <input type="file" id="photo-input" accept="image/*" multiple>
-                <label for="photo-input" class="upload-button">
-                    <span class="upload-icon">📸</span>
-                    Wybierz zdjęcia
-                </label>
-                <div class="upload-info">
-                    <p>Możesz wybrać kilka zdjęć naraz. Obsługujemy formaty: JPG, PNG, WEBP, HEIC/HEIF</p>
-                </div>
-            </div>
-            <div class="upload-progress hide">
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-                <span class="progress-text">Przesyłanie zdjęć...</span>
-            </div>
-        </section>
-
         <section class="gallery-section hide">
             <h2>Wspólne wspomnienia</h2>
-            <div class="gallery-filters">
-                <button class="filter-btn active" data-filter="all">Wszystkie</button>
-                <button class="filter-btn" data-filter="recent">Najnowsze</button>
-            </div>
             <div class="gallery-grid" id="gallery-grid">
                 <div class="loading-spinner">
                     <div class="spinner"></div>
@@ -69,6 +45,10 @@
             <div class="modal-backdrop"></div>
             <div class="modal-content">
                 <button class="modal-close">&times;</button>
+                <div class="modal-navigation">
+                    <button class="modal-nav-btn modal-prev" id="modal-prev">&#8249;</button>
+                    <button class="modal-nav-btn modal-next" id="modal-next">&#8250;</button>
+                </div>
                 <img class="modal-image" id="modal-image" alt="Powiększone zdjęcie">
                 <div class="modal-info">
                     <span class="modal-date" id="modal-date"></span>

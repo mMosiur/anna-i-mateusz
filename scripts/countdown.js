@@ -36,10 +36,7 @@ function updateCountdownDisplay(difference) {
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
-    document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
+    setCountdownDisplayValues(days, hours, minutes, seconds);
 }
 
 function showPartyMessage() {
@@ -87,6 +84,10 @@ function updateElapsedTime(weddingDate, currentTime) {
     const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
 
+    setCountdownDisplayValues(days, hours, minutes, seconds);
+}
+
+function setCountdownDisplayValues(days, hours, minutes, seconds) {
     document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
     document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
     document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
