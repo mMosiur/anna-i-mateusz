@@ -1,6 +1,6 @@
 import { fetchWeddingInfo } from './api.js';
 
-const apiBaseUrl = 'https://anna-i-mateusz.azurewebsites.net';
+const apiBaseUrl = 'https://api.annaimateusz.pl';
 let currentPhotos = [];
 let currentPhotoIndex = 0;
 let apiKey = null;

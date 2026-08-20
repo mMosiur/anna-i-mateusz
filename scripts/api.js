@@ -1,6 +1,6 @@
 import { updateWeddingInfo } from './display.js';
 
-export const apiBaseUrl = 'https://anna-i-mateusz.azurewebsites.net';
+export const apiBaseUrl = 'https://api.annaimateusz.pl';
 
 export async function fetchWeddingInfo() {
     const urlParams = new URLSearchParams(window.location.search);
